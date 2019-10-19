@@ -4,14 +4,14 @@ import styled from 'styled-components'
 
 export default function TodoHeader(props) {
   const remaining = props.todos.filter(todo => {
-    return !todo.isDone
+    return todo.isDone
   })
 
   return (
     <div style={{ marginTop: 30, marginBottom: 20 }}>
       <HeaderTitle>My todos</HeaderTitle>
       <TaskStatus>
-        Done {remaining.length} / Not yet {props.todos.length}
+        Done {remaining.length} / Total {props.todos.length}
       </TaskStatus>
       <Confirm
         isPurge={true}
