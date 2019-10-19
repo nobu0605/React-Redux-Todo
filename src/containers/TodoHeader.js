@@ -1,20 +1,17 @@
-import TodoForm from '../components/TodoForm'
+import TodoHeader from '../components/TodoHeader'
 import { connect } from 'react-redux'
 import { todoActions } from '../actions/todoActions'
 
 const mapStateToProps = state => {
   return {
-    item: state.todoReducer.item
+    todos: state.todoReducer.todos
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateItem: event => {
-      dispatch(todoActions.updateItem(event))
-    },
-    addTodo: event => {
-      dispatch(todoActions.addTodo(event))
+    purge: () => {
+      dispatch(todoActions.purge())
     }
   }
 }
@@ -22,4 +19,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoForm)
+)(TodoHeader)

@@ -4,62 +4,61 @@ import _ from 'lodash'
 
 const InitState = {
   todos: [],
-  item: '111'
+  item: ''
+}
+
+function getUniqueId() {
+  return new Date().getTime().toString(36) + '-' + Math.random().toString(36)
 }
 
 function todoReducer(state = InitState, action) {
   let _state = _.cloneDeep(state)
   switch (action.type) {
     case todoActionNames.CHECK_TODO:
-      const todos = _state.todos.map(todo => {
+      const checkTodos = _state.todos.map(todo => {
         return { id: todo.id, title: todo.title, isDone: todo.isDone }
       })
 
-      const pos = _state.todos
+      const checkPos = _state.todos
         .map(todo => {
           return todo.id
         })
-        .indexOf(action.payload.id)
+        .indexOf(action.payload.todo.id)
+      checkTodos[checkPos].isDone = !checkTodos[checkPos].isDone
+      _state.todos = checkTodos
+      return _state
 
-      todos[pos].isDone = !todos[pos].isDone
-      this.setState({
-        todos: todos
+    case todoActionNames.DELETE_TODO:
+      const deleteTodos = _state.todos.slice()
+      const deletePos = _state.todos.indexOf(action.payload.todo)
+      deleteTodos.splice(deletePos, 1)
+      _state.todos = deleteTodos
+      return _state
+
+    case todoActionNames.ADD_TODO:
+      action.payload.event.preventDefault()
+      if (_state.item.trim() === '') {
+        return
+      }
+      const item = {
+        id: getUniqueId(),
+        title: _state.item,
+        isDone: false
+      }
+      _state.todos.push(item)
+      _state.item = ''
+      return _state
+
+    case todoActionNames.UPDATE_ITEM:
+      _state.item = action.payload.event.target.value
+      return _state
+
+    case todoActionNames.PURGE:
+      const purgeTodos = _state.todos.filter(todo => {
+        return !todo.isDone
       })
-      return
-
-    // case groupActionNames.ADD_GROUP:
-    //   _state.groupCount++
-    //   let groupItem = {
-    //     id: action.payload.groupId,
-    //     label: action.payload.data
-    //   }
-    //   _state.groupList.push(groupItem)
-    //   return _state
-
-    // case groupActionNames.SELECT_GROUP:
-    //   _state.selectedGroup = action.payload.id
-    //   return _state
-
-    // case groupActionNames.EDIT_GROUP:
-    //   for (var i = 0; i < _state.groupList.length; i++) {
-    //     if (_state.groupList[i].id == action.payload.id) {
-    //       _state.groupList[i].label = action.payload.groupName
-    //       break
-    //     }
-    //   }
-    //   return _state
-
-    // case groupActionNames.DELETE_GROUP:
-    //   for (var i = 0; i < _state.groupList.length; i++) {
-    //     if (_state.groupList[i].id == action.payload.id) {
-    //       _state.groupList.splice(i, 1)
-    //       break
-    //     }
-    //   }
-    //   if (_state.selectedGroup == action.payload.id) {
-    //     _state.selectedGroup = _state.groupList[0].id
-    //   }
-    //   return _state
+      _state.todos = purgeTodos
+      return _state
 
     default:
       return state

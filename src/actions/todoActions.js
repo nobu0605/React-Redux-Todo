@@ -1,16 +1,25 @@
 export const todoActionNames = {
   ADD_TODO: 'ADD_TODO',
   CHECK_TODO: 'CHECK_TODO',
-  DELETE_TODO: 'DELETE_TODO'
+  DELETE_TODO: 'DELETE_TODO',
+  UPDATE_ITEM: 'UPDATE_ITEM',
+  PURGE: 'PURGE'
 }
 
 export const todoActions = {
-  addTodo: (label, selectedGroup) => {
+  addTodo: event => {
     return {
       type: todoActionNames.ADD_TODO,
       payload: {
-        label: label,
-        selectedGroup: selectedGroup
+        event: event
+      }
+    }
+  },
+  updateItem: event => {
+    return {
+      type: todoActionNames.UPDATE_ITEM,
+      payload: {
+        event: event
       }
     }
   },
@@ -28,6 +37,11 @@ export const todoActions = {
       payload: {
         todo: todo
       }
+    }
+  },
+  purge: () => {
+    return {
+      type: todoActionNames.PURGE
     }
   }
 }

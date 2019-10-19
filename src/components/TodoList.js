@@ -33,7 +33,7 @@ export default class TodoList extends React.Component {
         {this.props.todos.length ? (
           this.renderTodosTable()
         ) : (
-          <li>Nothing to do</li>
+          <p style={{ marginTop: 20, fontSize: 15 }}>Nothing to do</p>
         )}
       </div>
     )
