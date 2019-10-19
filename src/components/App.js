@@ -1,8 +1,8 @@
 import React from 'react'
 import '../App.css'
 import TodoHeader from './TodoHeader'
-import TodoList from './TodoList'
-import TodoForm from './TodoForm'
+import TodoList from '../containers/TodoList'
+import TodoForm from '../containers/TodoForm'
 
 const todos = []
 
@@ -92,11 +92,11 @@ class App extends React.Component {
     localStorage.setItem('todos', JSON.stringify(this.state.todos))
   }
 
-  componentDidMount() {
-    this.setState({
-      todos: JSON.parse(localStorage.getItem('todos')) || []
-    })
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     todos: JSON.parse(localStorage.getItem('todos')) || []
+  //   })
+  // }
   render() {
     return (
       <div className="container">
@@ -106,11 +106,7 @@ class App extends React.Component {
           updateItem={this.updateItem}
           addTodo={this.addTodo}
         />
-        <TodoList
-          todos={this.state.todos}
-          checkTodo={this.checkTodo}
-          deleteTodo={this.deleteTodo}
-        />
+        <TodoList checkTodo={this.checkTodo} deleteTodo={this.deleteTodo} />
       </div>
     )
   }

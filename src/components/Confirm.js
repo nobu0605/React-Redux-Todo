@@ -52,7 +52,7 @@ class Confirm extends React.Component {
   render() {
     const { name } = this.props
     return (
-      <div className="container">
+      <div style={{ marginTop: 14 }}>
         {name === 'Delete' ? (
           <Button primary onClick={this.submit}>
             {name}

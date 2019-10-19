@@ -2,30 +2,40 @@ import React from 'react'
 import TodoItem from './TodoItem'
 import { Table } from 'semantic-ui-react'
 
-export default function TodoList(props) {
-  const todos = props.todos.map(todo => {
+export default class TodoList extends React.Component {
+  renderTodosTable() {
     return (
-      <TodoItem
-        key={todo.id}
-        todo={todo}
-        checkTodo={props.checkTodo}
-        deleteTodo={props.deleteTodo}
-      />
+      <Table style={{ textAlign: 'center', marginTop: 20 }} celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Todo</Table.HeaderCell>
+            <Table.HeaderCell>Done</Table.HeaderCell>
+            <Table.HeaderCell>Delete</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        {this.props.todos.map(todo => {
+          return (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              checkTodo={this.props.checkTodo}
+              deleteTodo={this.props.deleteTodo}
+            />
+          )
+        })}
+      </Table>
     )
-  })
+  }
 
-  const todosTable = (
-    <Table style={{ textAlign: 'center', margin: 20 }} celled>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>Todo</Table.HeaderCell>
-          <Table.HeaderCell>Check</Table.HeaderCell>
-          <Table.HeaderCell>Delete</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-      {todos}
-    </Table>
-  )
-
-  return <div>{props.todos.length ? todosTable : <li>Nothing to do</li>}</div>
+  render() {
+    return (
+      <div>
+        {this.props.todos.length ? (
+          this.renderTodosTable()
+        ) : (
+          <li>Nothing to do</li>
+        )}
+      </div>
+    )
+  }
 }
