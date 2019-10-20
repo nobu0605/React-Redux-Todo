@@ -1,5 +1,4 @@
 import React from 'react'
-import '../App.css'
 import TodoHeader from '../containers/TodoHeader'
 import TodoList from '../containers/TodoList'
 import TodoForm from '../containers/TodoForm'
