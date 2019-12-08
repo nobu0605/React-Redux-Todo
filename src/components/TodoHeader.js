@@ -19,7 +19,7 @@ export default function TodoHeader(props) {
         purgeTodo={() => {
           props.purge()
         }}
-        name={'Purge'}
+        execution={'Purge'}
       ></Confirm>
     </div>
   )

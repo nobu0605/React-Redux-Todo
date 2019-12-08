@@ -50,16 +50,16 @@ class Confirm extends React.Component {
   }
 
   render() {
-    const { name } = this.props
+    const { execution } = this.props
     return (
       <div style={{ marginTop: 14 }}>
-        {name === 'Delete' ? (
+        {execution === 'Delete' ? (
           <Button primary onClick={this.submit}>
-            {name}
+            {execution}
           </Button>
         ) : (
           <Button secondary onClick={this.submit}>
-            {name}
+            {execution}
           </Button>
         )}
       </div>

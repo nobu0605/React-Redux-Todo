@@ -26,7 +26,7 @@ export default function TodoItem(props) {
             deleteTodo={() => {
               props.deleteTodo()
             }}
-            name={'Delete'}
+            execution={'Delete'}
           ></Confirm>
         </Table.Cell>
       </Table.Row>
