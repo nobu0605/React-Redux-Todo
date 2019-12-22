@@ -4,7 +4,8 @@ import { todoActions } from '../actions/todoActions'
 
 const mapStateToProps = state => {
   return {
-    item: state.todoReducer.item
+    item: state.todoReducer.item,
+    selectedBoard: state.boardReducer.selectedBoard
   }
 }
 
@@ -13,8 +14,8 @@ const mapDispatchToProps = dispatch => {
     updateItem: event => {
       dispatch(todoActions.updateItem(event))
     },
-    addTodo: event => {
-      dispatch(todoActions.addTodo(event))
+    addTodo: (event,selectedBoard) => {
+      dispatch(todoActions.addTodo(event,selectedBoard))
     }
   }
 }

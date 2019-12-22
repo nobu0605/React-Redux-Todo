@@ -1,5 +1,5 @@
 import React from 'react'
-import TodoItem from './TodoItem'
+import TodoItem from '../containers//TodoItem'
 import { Table } from 'semantic-ui-react'
 
 export default class TodoList extends React.Component {
@@ -13,15 +13,8 @@ export default class TodoList extends React.Component {
             <Table.HeaderCell>Delete</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        {this.props.todos.map(todo => {
-          return (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              checkTodo={this.props.checkTodo}
-              deleteTodo={this.props.deleteTodo}
-            />
-          )
+        {this.props.todos[this.props.selectedBoard].map(todo => {
+          return <TodoItem key={todo.id} todo={todo} />
         })}
       </Table>
     )
@@ -30,7 +23,7 @@ export default class TodoList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.todos.length ? (
+        {this.props.todos[this.props.selectedBoard] ? (
           this.renderTodosTable()
         ) : (
           <p style={{ marginTop: 20, fontSize: 15 }}>Nothing to do</p>

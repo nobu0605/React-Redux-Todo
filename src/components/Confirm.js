@@ -5,14 +5,6 @@ import '../confirm.css'
 import { Button } from 'semantic-ui-react'
 
 class Confirm extends React.Component {
-  deleteTodo(todo) {
-    return this.props.deleteTodo(todo)
-  }
-
-  purgeTodo(todo) {
-    return this.props.purgeTodo(todo)
-  }
-
   submit = () => {
     confirmAlert({
       customUI: ({ onClose }) => {
@@ -26,7 +18,7 @@ class Confirm extends React.Component {
             {isDelete && (
               <button
                 onClick={() => {
-                  this.deleteTodo(todo)
+                  this.props.deleteTodo(todo, this.props.selectedBoard)
                   onClose()
                 }}
               >
@@ -36,7 +28,7 @@ class Confirm extends React.Component {
             {isPurge && (
               <button
                 onClick={() => {
-                  this.purgeTodo(todo)
+                  this.props.purgeTodo(todo, this.props.selectedBoard)
                   onClose()
                 }}
               >

@@ -1,4 +1,4 @@
-import TodoList from '../components/TodoList'
+import TodoItem from '../components/TodoItem'
 import { connect } from 'react-redux'
 import { todoActions } from '../actions/todoActions'
 
@@ -12,12 +12,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     checkTodo: (todo,selectedBoard) => {
-      dispatch(todoActions.checkTodo(todo))
-    },
-    deleteTodo: (todo,selectedBoard) => {
-      dispatch(todoActions.deleteTodo(todo,selectedBoard))
+      dispatch(todoActions.checkTodo(todo,selectedBoard))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoItem)

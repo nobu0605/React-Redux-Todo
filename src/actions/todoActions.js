@@ -3,45 +3,50 @@ export const todoActionNames = {
   CHECK_TODO: 'CHECK_TODO',
   DELETE_TODO: 'DELETE_TODO',
   UPDATE_ITEM: 'UPDATE_ITEM',
-  PURGE: 'PURGE'
+  PURGE_TODO: 'PURGE_TODO'
 }
 
 export const todoActions = {
-  addTodo: event => {
+  addTodo: (event, selectedBoard) => {
     return {
       type: todoActionNames.ADD_TODO,
       payload: {
-        event: event
+        event: event,
+        selectedBoard: selectedBoard
       }
     }
   },
-  updateItem: event => {
+  updateItem: (event, selectedBoard) => {
     return {
       type: todoActionNames.UPDATE_ITEM,
       payload: {
-        event: event
+        event: event,
+        selectedBoard: selectedBoard
       }
     }
   },
-  checkTodo: todo => {
+  checkTodo: (todo, selectedBoard) => {
     return {
       type: todoActionNames.CHECK_TODO,
       payload: {
-        todo: todo
+        todo: todo,
+        selectedBoard: selectedBoard
       }
     }
   },
-  deleteTodo: todo => {
+  deleteTodo: (todo, selectedBoard) => {
     return {
       type: todoActionNames.DELETE_TODO,
       payload: {
-        todo: todo
+        todo: todo,
+        selectedBoard: selectedBoard
       }
     }
   },
-  purge: () => {
+  purgeTodo: selectedBoard => {
     return {
-      type: todoActionNames.PURGE
+      type: todoActionNames.PURGE_TODO,
+      payload: { selectedBoard: selectedBoard }
     }
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Confirm from './Confirm'
+import Confirm from '../containers/Confirm'
 import styled from 'styled-components'
 import { Table } from 'semantic-ui-react'
 
@@ -16,16 +16,13 @@ export default function TodoItem(props) {
           <Input
             type="checkbox"
             checked={props.todo.isDone}
-            onChange={() => props.checkTodo(props.todo)}
+            onChange={() => props.checkTodo(props.todo,props.selectedBoard)}
           />
         </Table.Cell>
         <Table.Cell>
           <Confirm
             isDelete={true}
             todo={props.todo}
-            deleteTodo={() => {
-              props.deleteTodo()
-            }}
             execution={'Delete'}
           ></Confirm>
         </Table.Cell>
